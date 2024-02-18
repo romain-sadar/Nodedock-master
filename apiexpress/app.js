@@ -24,7 +24,7 @@ console.log(url);
 mongoose.connect(`mongodb://${host}:${dbport}/nextu`)
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
-// mongoose.connect('mongodb+srv://erwan-hamza:NjfoSJFW3rBjYtcQ@cluster0.utebqfc.mongodb.net/nextu?retryWrites=true&w=majority')
+// mongoose.connect('mongodb+srv://romain-sadar:NjfoSJFW3rBjYtcQ@cluster0.utebqfc.mongodb.net/nextu?retryWrites=true&w=majority')
 //   .then(() => console.log("Connexion à MongoDB réussie !"))
 //   .catch(() => console.log("Connexion à MongoDB échouée !"));
 const Books = require('./models/book');
@@ -54,7 +54,7 @@ app.get('/books', async (req, res) => {
       if (result) {
         res.json(result);
       } else {
-        res.status(404).send('perdu looser');
+        res.status(404).send('Error');
       }
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -68,9 +68,9 @@ app.get('/books', async (req, res) => {
     try {
       const result = await Books.findByIdAndUpdate(bookId, updatedBook);
       if (result) {
-        res.send('Bien joué mon lutin');
+        res.send('Success');
       } else {
-        res.status(404).send('perdu looser');
+        res.status(404).send('Error');
       }
     
     } catch (error) {
@@ -85,9 +85,9 @@ app.get('/books', async (req, res) => {
     try {
       const result = await Books.findByIdAndDelete(bookId);
       if (result) {
-        res.send('Bravo ma biche');
+        res.send('Oui');
       } else {
-        res.status(404).send('Retry ma biche');
+        res.status(404).send('erreur');
       }
     } catch (error) {
       res.status(500).json({ error: error.message });
